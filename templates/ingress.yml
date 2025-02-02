@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: node-hostname-ingress
+  namespace: {{ .Values.appname }}
+  annotations:
+    cert-manager.io/cluster-issuer: "selfsigned-cluster-issuer"
+spec:
+  tls:
+  - hosts:
+     - localhost
+    secretName: localhost-tls-secret
+  ingressClassName: nginx
+  rules:
+  - host: localhost
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: node-hostname-service
+            port:
+              number: {{ .Values.service.port }}

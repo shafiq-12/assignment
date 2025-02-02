@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: node-hostname-deploy
+  namespace: nodehostname
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: node-hostname
+  template:
+    metadata:
+      labels:
+        app: node-hostname
+    spec:
+      serviceAccountName: nodehostname-sa
+      containers:
+        - name: node-hostname
+          image: node-hostname:v2
+          ports:
+            - containerPort: 3000
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
