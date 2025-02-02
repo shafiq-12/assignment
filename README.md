@@ -13,3 +13,16 @@
 - **Cert-Manager**: Issued **self-signed TLS certificates** for HTTPS
 - **NGINX Ingress**: Exposed the application via a Kubernetes Ingress
 - **Helm**: Used Helm charts for deployment automation
+
+## Left out for Production Quality
+
+- Implement logging for application
+- use any public cloud k8s service like EKS, AKS as we have used only local Desktop
+- use private registry.
+- use karpenter(AWS), Cluster Autoscalling (AKS) for the Autoscaling.
+- use datadog, grafana, promethus for the monitoring.
+- Setup RBAC for the users specific to the application.
+- Restrict API Server access of k8s in network level.
+- as it is growing org we can use spot instance for reducing more cost.
+- use argocd, github actions for the deployments.
+- use domain so that we can use letsencrypt certs.
